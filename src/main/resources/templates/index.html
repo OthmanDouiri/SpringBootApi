@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criptomonedas</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.18.3/bootstrap-table.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<style>
+    body {
+        background-image: url('https://pixelplex.io/next/images/cryptocurrency-exchange-development/cryptocurrency-exchange-development-bg-1600.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: white;
+        font-family: 'Arial', sans-serif;
+        text-align: center;
+        padding: 20px;
+    }
+
+    td, th {
+        color: white;
+        font-size: 1.2em;
+    }
+    .text-warning{
+    
+        font-weight: bold;
+    }
+    
+   
+</style>
+<body>
+    <div class="container">
+        <h1 class="mt-5 text-center">Precios de Criptomonedas</h1>
+        <div class="table-responsive mt-3">
+            <table class="table table-bordered table-striped"
+                   data-toggle="table" 
+                   data-pagination="true" 
+                   data-page-size="10"
+                   data-search="true"
+                   data-show-refresh="true"
+                   data-show-toggle="true"
+                   data-show-columns="true"
+                  >
+                <caption>Lista de precios de criptomonedas</caption>
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Simbolo</th>
+                        <th>Cambio Precio</th>
+                        <th>% Cambio</th>
+                        <th>Último Precio</th>
+                        <th>Volumen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="cripto : ${criptos}" th:if="${criptos != null}">
+                        <td class="text-warning" th:text="${cripto.symbol}"></td>
+                        <td th:text="${cripto.priceChange}"></td>
+                        <td th:text="${cripto.priceChangePercent}"></td>
+                        <td th:text="${cripto.lastPrice}"></td>
+                        <td th:text="${cripto.volume}"></td>
+                    </tr>
+                    <tr th:if="${criptos == null or #lists.isEmpty(criptos)}">
+                        <td colspan="5" class="text-center">No hay datos disponibles</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.18.3/bootstrap-table.min.js"></script>
+</body>
+</html>
